@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--bootstrap & Noty.css(notifier)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" rel="stylesheet" />
+    <!--JQuery + Noty.js( for Toast notification)-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
+        integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let val = location.href.split("/").slice(-1);
+        let num = val[0].indexOf('.')
+        let namePath = val[0].slice(0, num);
+        document.title = namePath + " ЛАБ";
+        console.log(location)
+
+        let parametr = location.search.substring(1).split("&");
+
+    </script>
+    <!--so, us need a separate file for the assembly(но ладно и так сойдет ахах)-->
+    <script src="js/notify.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <style>
+        .Abnormal {
+            display: none;
+            white-space: normal;
+        }
+    </style>
+    <title></title>
+</head>
+
+<body>
+    <div class="container main">
+        <h4>Введите количество лесных участков, подверженных болезни</h4>
+        <div>
+            <input type=text value="10" id="ChisloYchastkov">
+            <input type=button class="btn btn-outline-primary" value="Далее" id="Button1">
+            <hr>
+        </div>
+
+        <div id="div1" style="display:none">
+
+        </div>
+
+        <div class="m-2 col-3">
+            <textarea class="form-control" id="mytextarea" rows="4"
+                placeholder="Скопируйте сюда все значения"></textarea>
+        </div>
+        <div class="m-2">
+            <input type="button" class="btn btn-outline-primary" id="ButtonSave" value="Сохранить результаты">
+            <input type="button" class="btn btn-outline-danger" id="ButtonClear" Value="Удалить введённые значени">
+        </div>
+
+    </div>
+</body>
+
+</html>

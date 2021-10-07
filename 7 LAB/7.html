@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--bootstrap & Noty.css(notifier)-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" rel="stylesheet" />
+    <!--JQuery + Noty.js( for Toast notification)-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
+        integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let val = location.href.split("/").slice(-1);
+        let num = val[0].indexOf('.')
+        let namePath = val[0].slice(0, num);
+        document.title = namePath + " ЛАБ";
+
+        let parametr = location.search.substring(1).split("&");
+
+    </script>
+    <!--so, us need a separate file for the assembly(но ладно и так сойдет ахах)-->
+    <script src="js/notify.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/7_lab_1.js" defer></script>
+    <style>
+        .Abnormal {
+            display: none;
+            white-space: normal;
+        }
+    </style>
+    <title></title>
+</head>
+
+<body>
+    <div class="container main">
+        <h4>Введите количество лесных участков, подверженных болезни</h4>
+        <div>
+            <input type=text value="10" id="ChisloYchastkov">
+            <input type=button class="btn btn-outline-primary" value="Далее" id="Button1">
+            <hr>
+        </div>
+
+        <div id="div1" style="display:none">
+
+        </div>
+
+        <div class="m-2 col-3">
+            <textarea class="form-control" id="mytextarea" rows="4"
+                placeholder="Скопируйте сюда все значения"></textarea>
+        </div>
+        <div class="m-2">
+            <input type="button" class="btn btn-outline-primary" id="ButtonSave" value="Сохранить результаты">
+            <input type="button" class="btn btn-outline-danger" id="ButtonClear" Value="Удалить введённые значени">
+        </div>
+
+
+        <div class="m-2 row">
+            <div class="col-7">
+                <canvas id='canv' style="width: 500px; height: 250px; border: 1px double black">Обновите
+                    браузер</canvas>
+                <div class="form-color">
+                    <label for="backColorInput" class="form-label">Выберите цвет фона:</label>
+                    <input type="color" class="form-control form-control-color col-2" id="backColorInput"
+                        value="#ffffff" title="Choose your color">
+                    <label for="colorColorMark" class="form-label">Выберите цвет меток:</label>
+                    <input type="color" class="form-control form-control-color col-2" id="colorMark" value="#000000"
+                        title="Choose your color">
+                    <div class="row">
+                        <label for="colorAXIS" class="form-label">Выберите цвет линий:</label>
+                        <input type="color" class="form-control form-control-color " id="colorLine_dev" value="#FFFF00"
+                            title="Choose your color">
+                        <input type="color" class="form-control form-control-color " id="colorLine_abno" value="#FF0000"
+                            title="Choose your color">
+                        <input type="color" class="form-control form-control-color " id="colorLine_mid" value="#008000"
+                            title="Choose your color">
+                    </div>
+                    <label for="fontColorInput" class="form-label">Выберите цвет текста:</label>
+                    <input type="color" class="form-control form-control-color col-2" id="fontColorInput"
+                        value="#000000" title="Choose your color">
+                    <label for="colorLine" class="form-label">Выберите цвет оси:</label>
+                    <input type="color" class="form-control form-control-color col-2" id="colorAXIS" value="#000000"
+                        title="Choose your color">
+                </div>
+
+            </div>
+
+            <canvas id='canv2' style="width: 500px; height: 250px; border: 1px double rgb(238, 155, 1)"></canvas>
+        </div>
+    </div>
+</body>
+
+</html>

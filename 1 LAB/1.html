@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--JQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        /*
+            a little bit of css :)
+        */
+        body {
+            font-family: "Trebuchet MS", sans-serif;
+            margin: 50px;
+        }
+
+        #div1 {
+            width: 600px;
+        }
+
+        #div1 p {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+
+            $("#Button1").click(() => {
+
+                let n = $("#ChisloYchastkov").val();
+                if (n <= 0) return; // 
+                $("#div1").css("display", "block");
+                $("#div1").html("");
+                for (let i = 1; i <= n; i++) {
+                    if (i <= n) {
+                        $("#div1").append(
+                            `<p>
+                                <label>Площадь повреждённой территории на ${i} участке:</label><input class='tab' type=text id='ploshad${i}'>
+                            </p>`);
+                    }
+                }
+                $("#div1").append(
+                    `<p>
+                        <hr><input type=button value='Поиск аномальных значений' id='Button2'>
+                    </p>`);
+
+                $("#div1").append(
+                    `<p>
+                        <label>Общая площадь повреждённой территории:</label> <input class='tab' type=text id='SumPloshad'>
+                    </p>`);
+
+
+                $("#div1").append(
+                    `<p>
+                        <label>Средняя площадь повреждённой территории:</label> <input class='tab' type=text id='SredPloshad'>
+                    </p>`);
+
+
+                $("#div1").append(
+                    `<p>
+                        <label>Среднеквадратическое отклонение:</label> <input class='tab' type=text id='Otklonenie'>
+                    </p>`);
+
+            });
+
+
+            $(document).on('click', "#Button2", () => {
+
+                let n = $("#ChisloYchastkov").val();
+                $("#SumPloshad").val("0");
+                $("#SredPloshad").val("0");
+                $("#Otklonenie").val("0");
+
+                for (let i = 1; i <= n; i++) {
+                    if (i <= n) {
+                        element1 = "ploshad" + i;
+                        $("#SumPloshad").val($("#SumPloshad").val() * 1 + $(`#${element1}`).val() * 1);
+                    }
+                }
+
+                $("#SredPloshad").val($("#SumPloshad").val() / n);
+
+                for (let i = 1; i <= n; i++) {
+                    if (i <= n) {
+                        element1 = "ploshad" + i;
+                        $("#Otklonenie").val($("#Otklonenie").val() * 1 + Math.pow($(`#${element1}`).val() - $("#SredPloshad").val(), 2));
+                    }
+                }
+
+                $("#Otklonenie").val(Math.sqrt($("#Otklonenie").val() * 1 / n));
+
+                let number = getRatio(n);                
+                for (let i = 1; i <= n; i++) {
+                    element1 = "ploshad" + i;
+                    $(`#${element1}`).css("background", "");
+                    if (($(`#${element1}`).val() - $("#SredPloshad").val()) / $("#Otklonenie").val() >= number) {
+                        $(`#${element1}`).css("background", "red");
+                    }
+                }
+
+            });
+        });
+
+        function getRatio(n) {
+            if (n <= 5) {
+                return 1.791;
+            } else if (n > 5 || n <= 10) {
+                return 2.146;
+            } else if (n > 10 || n <= 15) {
+                return 2.326;
+            } else if (n > 15 || n <= 20) {
+                return 2.447;
+            } else if (n > 20 || n <= 25) {
+                return 2.447;
+            } else {
+                return 2.633;
+            }
+        }
+
+    </script>
+    <title>1 лаб</title>
+</head>
+
+<body>
+    <div>
+        <b>Введите количество лесных участков, подверженных болезни</b><br>
+        <input type=text value="10" id="ChisloYchastkov"><br>
+        <input type=button value="Далее" id="Button1">
+        <hr>
+
+        <div id="div1" style="display:none"></div>
+
+    </div>
+</body>
+
+</html>
